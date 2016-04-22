@@ -6,10 +6,6 @@ class Question extends React.Component {
     return (
       <div>
           {this.props.questionText}?
-          <div className="">
-            <button type="button" className="btn btn-success" onClick={this.props.onAnswerQuestion} value="yes">Yes</button>
-            <button type="button" className="btn btn-danger"onClick={this.props.onAnswerQuestion} value="no">No</button>
-          </div>
       </div>
 
     );

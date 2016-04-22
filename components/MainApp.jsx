@@ -1,6 +1,6 @@
 import React from 'react';
 import Question from './Question';
-// import QuestionButton from './Question';
+import QuestionButton from './QuestionButton';
 
 class MainApp extends React.Component {
   constructor(props) {
@@ -43,13 +43,14 @@ class MainApp extends React.Component {
     }
     return this.returnSummary();
   }
-  renderQuestion(answer) {
-    return <Question onAnswerQuestion={this.answerQuestion.bind(this, "no")} questionText={this.state.questions[this.state.currentQuestion].question} />;
-    // return <QueonAnswerQuestion={this.answerQuestion.bind(this, arg1)} stion questionText={this.state.questions[this.state.currentQuestion].question} />;
-            // <QuestionButton onAnswerQuestion={this.answerQuestion.bind(this, "yes")} buttonText="Yes"/>;
+  renderQuestion() {
+    return <div>
+            <Question questionText={this.state.questions[this.state.currentQuestion].question} />
+            <QuestionButton onAnswerQuestion={this.answerQuestion.bind(this, "yes")} buttonText="Yes" />
+            <QuestionButton onAnswerQuestion={this.answerQuestion.bind(this, "no")} buttonText="No" />
+          </div>;
   };
   returnSummary() {
-    var names = this.state.questions;
     return (
         <ul>
             {this.state.questions.map(function(question, index){
@@ -59,6 +60,13 @@ class MainApp extends React.Component {
     )
   };
   answerQuestion(answer) {
+    const newQuestions = this.state.questions.map(question => {
+      if(question.id === 2) {
+        question.answer = answer;
+      }
+
+      return question;
+    });
 
     // const newQuestions = this.state.questions.map(question => {
     //   debugger;
@@ -70,6 +78,7 @@ class MainApp extends React.Component {
     // });
     this.setState(
       {
+        questions: newQuestions,
         currentQuestion: this.state.currentQuestion + 1
       }
     );
