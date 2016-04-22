@@ -13,22 +13,22 @@ class MainApp extends React.Component {
       questions: [
           {
             id: 1,
-            question: "Do you like LL",
-            answer: "",
+            questionText: "Do you like LL",
+            usersAnswer: "",
             yesYouTubeUrl: "https://www.youtube.com/watch?v=DsAn_n6O5Ns",
             noYouTubeUrl: "https://www.youtube.com/watch?v=sPmY9I-zWBk"
           },
           {
             id: 2,
-            question: "Do you like Tim",
-            answer: "",
+            questionText: "Do you like Tim",
+            usersAnswer: "",
             yesYouTubeUrl: "https://www.youtube.com/watch?v=xhfauq1llMc",
             noYouTubeUrl: "https://www.youtube.com/watch?v=zSQbUV-u5Xo"
           },
           {
             id: 3,
-            question: "Do you like Oph",
-            answer: "",
+            questionText: "Do you like Oph",
+            usersAnswer: "",
             yesYouTubeUrl: "https://www.youtube.com/watch?v=ALf5wpTokKA",
             noYouTubeUrl: "https://www.youtube.com/watch?v=zSQbUV-u5Xo"
           }
@@ -47,7 +47,7 @@ class MainApp extends React.Component {
   showYoutube() {
     var question = this.state.questions[this.state.currentQuestion - 1];
     var youTubeUrl = question.yesYouTubeUrl;
-    if (question.answer === 'no') {
+    if (question.usersAnswer === 'no') {
       youTubeUrl = question.noYouTubeUrl;
     }
     return <ReactPlayer
@@ -61,7 +61,7 @@ class MainApp extends React.Component {
   renderQuestion() {
     var question = this.state.questions[this.state.currentQuestion];
     return <div>
-            <Question questionText={question.question} />
+            <Question questionText={question.questionText} />
             <QuestionButton onAnswerQuestion={this.answerQuestion.bind(this, question.id, "yes")} buttonText="Yes" />
             <QuestionButton onAnswerQuestion={this.answerQuestion.bind(this, question.id, "no")} buttonText="No" />
           </div>;
@@ -70,7 +70,7 @@ class MainApp extends React.Component {
     return (
         <ul>
             {this.state.questions.map(function(question, index){
-                return <li key={ index }>{question.question + ":" + question.answer}</li>;
+                return <li key={ index }>{question.questionText + ":" + question.usersAnswer}</li>;
               })}
         </ul>
     )
@@ -78,7 +78,7 @@ class MainApp extends React.Component {
   answerQuestion(id, answer) {
     const newQuestions = this.state.questions.map(question => {
       if(question.id === id) {
-        question.answer = answer;
+        question.usersAnswer = answer;
       }
 
       return question;
