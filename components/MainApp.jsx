@@ -37,17 +37,17 @@ class MainApp extends React.Component {
     };
   }
   render() {
+    if(this.state.inTransition) {
+      return this.showYoutube();
+    }
     if(this.state.currentQuestion < this.state.questions.length) {
-      if(this.state.inTransition) {
-        return this.showYoutube();
-      }
       return this.renderQuestion();
     }
     return this.returnSummary();
   }
   showYoutube() {
     return <ReactPlayer
-          url='https://www.youtube.com/watch?v=sxEXBXG0ymg'
+          url='https://www.youtube.com/watch?v=RQ0FzwaqLow'
           playing={true}
           height={$(window).height()}
           width={$(window).width()}
