@@ -1,5 +1,4 @@
 import React from 'react';
-import QuestionButtons from './QuestionButtons';
 
 class Question extends React.Component {
   render() {

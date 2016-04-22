@@ -1,6 +1,7 @@
 import React from 'react';
 import Question from './Question';
 import QuestionButton from './QuestionButton';
+import ReactPlayer from 'react-player'
 
 class MainApp extends React.Component {
   constructor(props) {
@@ -9,12 +10,12 @@ class MainApp extends React.Component {
     this.state = {
       currentQuestion: 0,
       answers: [],
+      inTransition: false,
       questions: [
           {
             id: 1,
             question: "Do you like LL",
             answer: "",
-            correctAnswer: "yes",
             correctYoutubeUrl: "http://www.google.com",
             incorrectYoutubeUrl: "http://www.yahoo.com"
           },
@@ -22,7 +23,6 @@ class MainApp extends React.Component {
             id: 2,
             question: "Do you like Tim",
             answer: "",
-            correctAnswer: "no",
             correctYoutubeUrl: "http://www.google.com",
             incorrectYoutubeUrl: "http://www.yahoo.com"
           },
@@ -30,7 +30,6 @@ class MainApp extends React.Component {
             id: 3,
             question: "Do you like Oph",
             answer: "",
-            correctAnswer: "yes",
             correctYoutubeUrl: "http://www.google.com",
             incorrectYoutubeUrl: "http://www.yahoo.com"
           }
@@ -39,45 +38,49 @@ class MainApp extends React.Component {
   }
   render() {
     if(this.state.currentQuestion < this.state.questions.length) {
+      if(this.state.inTransition) {
+        return this.showYoutube();
+      }
       return this.renderQuestion();
     }
     return this.returnSummary();
   }
+  showYoutube() {
+    return <ReactPlayer
+          url='https://www.youtube.com/watch?v=sxEXBXG0ymg'
+          playing={true}
+          height={$(window).height()}
+          width={$(window).width()}
+          onEnded={() => this.setState({ inTransition: false })}
+        />
+  };
   renderQuestion() {
     return <div>
             <Question questionText={this.state.questions[this.state.currentQuestion].question} />
-            <QuestionButton onAnswerQuestion={this.answerQuestion.bind(this, "yes")} buttonText="Yes" />
-            <QuestionButton onAnswerQuestion={this.answerQuestion.bind(this, "no")} buttonText="No" />
+            <QuestionButton onAnswerQuestion={this.answerQuestion.bind(this, this.state.questions[this.state.currentQuestion].id, "yes")} buttonText="Yes" />
+            <QuestionButton onAnswerQuestion={this.answerQuestion.bind(this, this.state.questions[this.state.currentQuestion].id, "no")} buttonText="No" />
           </div>;
   };
   returnSummary() {
     return (
         <ul>
             {this.state.questions.map(function(question, index){
-                return <li key={ index }>{question.question + ":" + question.answer + ":" + question.correctAnswer}</li>;
+                return <li key={ index }>{question.question + ":" + question.answer}</li>;
               })}
         </ul>
     )
   };
-  answerQuestion(answer) {
+  answerQuestion(id, answer) {
     const newQuestions = this.state.questions.map(question => {
-      if(question.id === 2) {
+      if(question.id === id) {
         question.answer = answer;
       }
 
       return question;
     });
-
-    // const newQuestions = this.state.questions.map(question => {
-    //   debugger;
-    //   if(question === index) {
-    //     question.answer = answer;
-    //   }
-    //
-    //   return question;
-    // });
     this.setState(
       {
+        inTransition: true,
         questions: newQuestions,
         currentQuestion: this.state.currentQuestion + 1
       }
