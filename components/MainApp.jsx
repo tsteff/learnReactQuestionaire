@@ -9,29 +9,28 @@ class MainApp extends React.Component {
 
     this.state = {
       currentQuestion: 0,
-      answers: [],
       inTransition: false,
       questions: [
           {
             id: 1,
             question: "Do you like LL",
             answer: "",
-            correctYoutubeUrl: "http://www.google.com",
-            incorrectYoutubeUrl: "http://www.yahoo.com"
+            yesYouTubeUrl: "https://www.youtube.com/watch?v=DsAn_n6O5Ns",
+            noYouTubeUrl: "https://www.youtube.com/watch?v=sPmY9I-zWBk"
           },
           {
             id: 2,
             question: "Do you like Tim",
             answer: "",
-            correctYoutubeUrl: "http://www.google.com",
-            incorrectYoutubeUrl: "http://www.yahoo.com"
+            yesYouTubeUrl: "https://www.youtube.com/watch?v=xhfauq1llMc",
+            noYouTubeUrl: "https://www.youtube.com/watch?v=zSQbUV-u5Xo"
           },
           {
             id: 3,
             question: "Do you like Oph",
             answer: "",
-            correctYoutubeUrl: "http://www.google.com",
-            incorrectYoutubeUrl: "http://www.yahoo.com"
+            yesYouTubeUrl: "https://www.youtube.com/watch?v=ALf5wpTokKA",
+            noYouTubeUrl: "https://www.youtube.com/watch?v=zSQbUV-u5Xo"
           }
       ]
     };
@@ -46,8 +45,13 @@ class MainApp extends React.Component {
     return this.returnSummary();
   }
   showYoutube() {
+    var question = this.state.questions[this.state.currentQuestion - 1];
+    var youTubeUrl = question.yesYouTubeUrl;
+    if (question.answer === 'no') {
+      youTubeUrl = question.noYouTubeUrl;
+    }
     return <ReactPlayer
-          url='https://www.youtube.com/watch?v=RQ0FzwaqLow'
+          url={youTubeUrl}
           playing={true}
           height={$(window).height()}
           width={$(window).width()}
@@ -55,10 +59,11 @@ class MainApp extends React.Component {
         />
   };
   renderQuestion() {
+    var question = this.state.questions[this.state.currentQuestion];
     return <div>
-            <Question questionText={this.state.questions[this.state.currentQuestion].question} />
-            <QuestionButton onAnswerQuestion={this.answerQuestion.bind(this, this.state.questions[this.state.currentQuestion].id, "yes")} buttonText="Yes" />
-            <QuestionButton onAnswerQuestion={this.answerQuestion.bind(this, this.state.questions[this.state.currentQuestion].id, "no")} buttonText="No" />
+            <Question questionText={question.question} />
+            <QuestionButton onAnswerQuestion={this.answerQuestion.bind(this, question.id, "yes")} buttonText="Yes" />
+            <QuestionButton onAnswerQuestion={this.answerQuestion.bind(this, question.id, "no")} buttonText="No" />
           </div>;
   };
   returnSummary() {
