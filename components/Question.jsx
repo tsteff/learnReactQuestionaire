@@ -6,7 +6,6 @@ class Question extends React.Component {
       <div>
           {this.props.questionText}?
       </div>
-
     );
   }
 }

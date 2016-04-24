@@ -7,7 +7,6 @@ import ReactPlayer from 'react-player'
 class MainApp extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       currentQuestion: 1,
       currentQuiz: 0,
@@ -72,16 +71,16 @@ class MainApp extends React.Component {
     };
   }
   render() {
-    if(this.state.currentQuiz == 0) {
+    if (this.state.currentQuiz == 0) {
       return this.renderSelectQuizScreen();
     }
-    if(this.state.inTransition) {
+    if (this.state.inTransition) {
       return this.showYoutube();
     }
-    if(this.state.currentQuestion <= this.state.questions.length) {
+    if (this.state.currentQuestion <= this.state.questions.length) {
       return this.renderQuestion();
     }
-    if(this.state.currentQuestion > this.state.questions.length) {
+    if (this.state.currentQuestion > this.state.questions.length) {
       return this.returnSummary();
     }
   }
