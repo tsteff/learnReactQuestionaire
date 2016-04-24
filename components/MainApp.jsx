@@ -8,7 +8,7 @@ class MainApp extends React.Component {
     super(props);
 
     this.state = {
-      currentQuestion: 0,
+      currentQuestion: 1,
       inTransition: false,
       questions: [
           {
@@ -39,13 +39,15 @@ class MainApp extends React.Component {
     if(this.state.inTransition) {
       return this.showYoutube();
     }
-    if(this.state.currentQuestion < this.state.questions.length) {
+    if(this.state.currentQuestion <= this.state.questions.length) {
       return this.renderQuestion();
     }
-    return this.returnSummary();
+    if(this.state.currentQuestion > this.state.questions.length) {
+      return this.returnSummary();
+    }
   }
   showYoutube() {
-    var question = this.state.questions[this.state.currentQuestion - 1];
+    var question = this.state.questions.find(question => question.id == this.state.currentQuestion - 1);
     var youTubeUrl = question.yesYouTubeUrl;
     if (question.usersAnswer === 'no') {
       youTubeUrl = question.noYouTubeUrl;
@@ -59,7 +61,7 @@ class MainApp extends React.Component {
         />
   };
   renderQuestion() {
-    var question = this.state.questions[this.state.currentQuestion];
+    var question = this.state.questions.find(question => question.id == this.state.currentQuestion);
     return <div>
             <Question questionText={question.questionText} />
             <QuestionButton onAnswerQuestion={this.answerQuestion.bind(this, question.id, "yes")} buttonText="Yes" />
