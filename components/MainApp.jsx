@@ -1,6 +1,7 @@
 import React from 'react';
 import Question from './Question';
 import QuestionButton from './QuestionButton';
+import QuizButton from './QuizButton';
 import ReactPlayer from 'react-player'
 
 class MainApp extends React.Component {
@@ -15,6 +16,7 @@ class MainApp extends React.Component {
       quizzes: [
         {
           id: 1,
+          name: "Quiz One",
           questions: [
             {
               id: 1,
@@ -41,6 +43,7 @@ class MainApp extends React.Component {
         },
         {
           id: 2,
+          name: "Quiz Two",
           questions: [
             {
               id: 1,
@@ -69,7 +72,6 @@ class MainApp extends React.Component {
     };
   }
   render() {
-    debugger;
     if(this.state.currentQuiz == 0) {
       return this.renderSelectQuizScreen();
     }
@@ -83,6 +85,17 @@ class MainApp extends React.Component {
       return this.returnSummary();
     }
   }
+  renderSelectQuizScreen() {
+    return (
+      <div>
+        {
+          this.state.quizzes.map((quiz) => {
+            return <QuizButton onSelectQuiz={() => this.selectQuiz(quiz.id)} buttonText={quiz.name}/>
+          })
+        }
+      </div>
+        );
+  };
   showYoutube() {
     var question = this.state.questions.find(question => question.id == this.state.currentQuestion - 1);
     var youTubeUrl = question.yesYouTubeUrl;
@@ -107,25 +120,18 @@ class MainApp extends React.Component {
           </div>
         );
   };
-  renderSelectQuizScreen() {
-    return (
-          <div>
-            <button type="button" className="btn btn-lg btn-primary" onClick={() => this.selectQuiz(1)}> Quiz 1</button>
-            <button type="button" className="btn btn-lg btn-primary" onClick={() => this.selectQuiz(2)}> Quiz 2</button>
-          </div>
-        );
-  };
   returnSummary() {
     return (
         <ul>
-            {this.state.questions.map(function(question, index){
-                return <li key={ index }>{question.questionText + ":" + question.usersAnswer}</li>;
-              })}
+            {
+              this.state.questions.map((question) => {
+                return <li>{question.questionText + ":" + question.usersAnswer}</li>;
+              })
+            }
         </ul>
     );
   };
   selectQuiz(quizId) {
-    debugger;
     var quizQuestions = this.state.quizzes.find(quiz => quiz.id === quizId);
     this.setState(
       {
@@ -139,7 +145,6 @@ class MainApp extends React.Component {
       if(question.id === id) {
         question.usersAnswer = answer;
       }
-
       return question;
     });
     this.setState(
