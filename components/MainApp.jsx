@@ -9,33 +9,70 @@ class MainApp extends React.Component {
 
     this.state = {
       currentQuestion: 1,
+      currentQuiz: 0,
       inTransition: false,
-      questions: [
-          {
-            id: 1,
-            questionText: "Do you like LL",
-            usersAnswer: "",
-            yesYouTubeUrl: "https://www.youtube.com/watch?v=DsAn_n6O5Ns",
-            noYouTubeUrl: "https://www.youtube.com/watch?v=sPmY9I-zWBk"
-          },
-          {
-            id: 2,
-            questionText: "Do you like Tim",
-            usersAnswer: "",
-            yesYouTubeUrl: "https://www.youtube.com/watch?v=xhfauq1llMc",
-            noYouTubeUrl: "https://www.youtube.com/watch?v=zSQbUV-u5Xo"
-          },
-          {
-            id: 3,
-            questionText: "Do you like Oph",
-            usersAnswer: "",
-            yesYouTubeUrl: "https://www.youtube.com/watch?v=ALf5wpTokKA",
-            noYouTubeUrl: "https://www.youtube.com/watch?v=zSQbUV-u5Xo"
-          }
+      questions: [],
+      quizzes: [
+        {
+          id: 1,
+          questions: [
+            {
+              id: 1,
+              questionText: "Do you like LL",
+              usersAnswer: "",
+              yesYouTubeUrl: "https://www.youtube.com/watch?v=DsAn_n6O5Ns",
+              noYouTubeUrl: "https://www.youtube.com/watch?v=sPmY9I-zWBk"
+            },
+            {
+              id: 2,
+              questionText: "Do you like Tim",
+              usersAnswer: "",
+              yesYouTubeUrl: "https://www.youtube.com/watch?v=xhfauq1llMc",
+              noYouTubeUrl: "https://www.youtube.com/watch?v=zSQbUV-u5Xo"
+            },
+            {
+              id: 3,
+              questionText: "Do you like Oph",
+              usersAnswer: "",
+              yesYouTubeUrl: "https://www.youtube.com/watch?v=ALf5wpTokKA",
+              noYouTubeUrl: "https://www.youtube.com/watch?v=zSQbUV-u5Xo"
+            }
+          ]
+        },
+        {
+          id: 2,
+          questions: [
+            {
+              id: 1,
+              questionText: "Do you like LL2",
+              usersAnswer: "",
+              yesYouTubeUrl: "https://www.youtube.com/watch?v=DsAn_n6O5Ns",
+              noYouTubeUrl: "https://www.youtube.com/watch?v=sPmY9I-zWBk"
+            },
+            {
+              id: 2,
+              questionText: "Do you like Tim2",
+              usersAnswer: "",
+              yesYouTubeUrl: "https://www.youtube.com/watch?v=xhfauq1llMc",
+              noYouTubeUrl: "https://www.youtube.com/watch?v=zSQbUV-u5Xo"
+            },
+            {
+              id: 3,
+              questionText: "Do you like Oph2",
+              usersAnswer: "",
+              yesYouTubeUrl: "https://www.youtube.com/watch?v=ALf5wpTokKA",
+              noYouTubeUrl: "https://www.youtube.com/watch?v=zSQbUV-u5Xo"
+            }
+          ]
+        }
       ]
     };
   }
   render() {
+    debugger;
+    if(this.state.currentQuiz == 0) {
+      return this.renderSelectQuizScreen();
+    }
     if(this.state.inTransition) {
       return this.showYoutube();
     }
@@ -58,15 +95,25 @@ class MainApp extends React.Component {
           height={$(window).height()}
           width={$(window).width()}
           onEnded={() => this.setState({ inTransition: false })}
-        />
+        />;
   };
   renderQuestion() {
     var question = this.state.questions.find(question => question.id == this.state.currentQuestion);
-    return <div>
+    return (
+          <div>
             <Question questionText={question.questionText} />
             <QuestionButton onAnswerQuestion={this.answerQuestion.bind(this, question.id, "yes")} buttonText="Yes" />
             <QuestionButton onAnswerQuestion={this.answerQuestion.bind(this, question.id, "no")} buttonText="No" />
-          </div>;
+          </div>
+        );
+  };
+  renderSelectQuizScreen() {
+    return (
+          <div>
+            <button type="button" className="btn btn-lg btn-primary" onClick={() => this.selectQuiz(1)}> Quiz 1</button>
+            <button type="button" className="btn btn-lg btn-primary" onClick={() => this.selectQuiz(2)}> Quiz 2</button>
+          </div>
+        );
   };
   returnSummary() {
     return (
@@ -75,7 +122,17 @@ class MainApp extends React.Component {
                 return <li key={ index }>{question.questionText + ":" + question.usersAnswer}</li>;
               })}
         </ul>
-    )
+    );
+  };
+  selectQuiz(quizId) {
+    debugger;
+    var quizQuestions = this.state.quizzes.find(quiz => quiz.id === quizId);
+    this.setState(
+      {
+        questions: quizQuestions.questions,
+        currentQuiz: quizId
+      }
+    );
   };
   answerQuestion(id, answer) {
     const newQuestions = this.state.questions.map(question => {
@@ -92,6 +149,6 @@ class MainApp extends React.Component {
         currentQuestion: this.state.currentQuestion + 1
       }
     );
-  }
+  };
 }
 export default MainApp;
