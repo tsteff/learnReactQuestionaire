@@ -15,25 +15,25 @@ class MainApp extends React.Component {
       quizzes: [
         {
           id: 1,
-          name: "Quiz One",
+          name: "Comic Quiz",
           questions: [
             {
               id: 1,
-              questionText: "Do you like LL",
+              questionText: "Is batman better than superman",
               usersAnswer: "",
               yesYouTubeUrl: "https://www.youtube.com/watch?v=DsAn_n6O5Ns",
               noYouTubeUrl: "https://www.youtube.com/watch?v=sPmY9I-zWBk"
             },
             {
               id: 2,
-              questionText: "Do you like Tim",
+              questionText: "Can wolverine beat ironman",
               usersAnswer: "",
               yesYouTubeUrl: "https://www.youtube.com/watch?v=xhfauq1llMc",
               noYouTubeUrl: "https://www.youtube.com/watch?v=zSQbUV-u5Xo"
             },
             {
               id: 3,
-              questionText: "Do you like Oph",
+              questionText: "Is wonder woman more intelligent than cat women",
               usersAnswer: "",
               yesYouTubeUrl: "https://www.youtube.com/watch?v=ALf5wpTokKA",
               noYouTubeUrl: "https://www.youtube.com/watch?v=zSQbUV-u5Xo"
@@ -42,25 +42,25 @@ class MainApp extends React.Component {
         },
         {
           id: 2,
-          name: "Quiz Two",
+          name: "Movie Quiz",
           questions: [
             {
               id: 1,
-              questionText: "Do you like LL2",
+              questionText: "Did titanic make more money than avatar",
               usersAnswer: "",
               yesYouTubeUrl: "https://www.youtube.com/watch?v=DsAn_n6O5Ns",
               noYouTubeUrl: "https://www.youtube.com/watch?v=sPmY9I-zWBk"
             },
             {
               id: 2,
-              questionText: "Do you like Tim2",
+              questionText: "Did the narrator die in Fight Club",
               usersAnswer: "",
               yesYouTubeUrl: "https://www.youtube.com/watch?v=xhfauq1llMc",
               noYouTubeUrl: "https://www.youtube.com/watch?v=zSQbUV-u5Xo"
             },
             {
               id: 3,
-              questionText: "Do you like Oph2",
+              questionText: "Pulp Fication was played at our wedding",
               usersAnswer: "",
               yesYouTubeUrl: "https://www.youtube.com/watch?v=ALf5wpTokKA",
               noYouTubeUrl: "https://www.youtube.com/watch?v=zSQbUV-u5Xo"
@@ -121,10 +121,10 @@ class MainApp extends React.Component {
   };
   returnSummary() {
     return (
-        <ul>
+        <ul className="list-group">
             {
               this.state.questions.map((question) => {
-                return <li>{question.questionText + ":" + question.usersAnswer}</li>;
+                return <li className="list-group-item">{question.questionText + ":" + question.usersAnswer}</li>;
               })
             }
         </ul>
