@@ -94,7 +94,7 @@ class MainApp extends React.Component {
           })
         }
       </div>
-        );
+      );
   };
   showYoutube() {
     var question = this.state.questions.find(question => question.id == this.state.currentQuestion - 1);
@@ -115,8 +115,8 @@ class MainApp extends React.Component {
     return (
           <div>
             <Question questionText={question.questionText} />
-            <QuestionButton onAnswerQuestion={this.answerQuestion.bind(this, question.id, "yes")} buttonText="Yes" />
-            <QuestionButton onAnswerQuestion={this.answerQuestion.bind(this, question.id, "no")} buttonText="No" />
+            <QuestionButton onAnswerQuestion={() => this.answerQuestion(question.id, "yes")} buttonText="Yes" />
+            <QuestionButton onAnswerQuestion={() => this.answerQuestion(question.id, "no")} buttonText="No" />
           </div>
         );
   };
