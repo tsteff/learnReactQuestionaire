@@ -3,6 +3,7 @@ import Question from './Question';
 import QuestionButton from './QuestionButton';
 import QuizButton from './QuizButton';
 import ReactPlayer from 'react-player'
+import QuestionSummary from './QuestionSummary'
 
 class MainApp extends React.Component {
   constructor(props) {
@@ -66,6 +67,19 @@ class MainApp extends React.Component {
               noYouTubeUrl: "https://www.youtube.com/watch?v=zSQbUV-u5Xo"
             }
           ]
+        },
+        {
+          id: 3,
+          name: "Small One Question Quiz",
+          questions: [
+            {
+              id: 1,
+              questionText: "Small Question",
+              usersAnswer: "",
+              yesYouTubeUrl: "https://www.youtube.com/watch?v=DsAn_n6O5Ns",
+              noYouTubeUrl: "https://www.youtube.com/watch?v=sPmY9I-zWBk"
+            }
+          ]
         }
       ]
     };
@@ -121,13 +135,7 @@ class MainApp extends React.Component {
   };
   returnSummary() {
     return (
-        <ul className="list-group">
-            {
-              this.state.questions.map((question) => {
-                return <li className="list-group-item">{question.questionText + ":" + question.usersAnswer}</li>;
-              })
-            }
-        </ul>
+      <QuestionSummary questionList={this.state.questions}/>
     );
   };
   selectQuiz(quizId) {
