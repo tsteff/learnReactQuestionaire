@@ -15,12 +15,12 @@ class QuestionSummary extends React.Component {
             {
               this.props.questionList.map((question) => {
                 return (
-                <tr>
-                  <td>{question.id}</td>
-                  <td>{question.questionText}</td>
-                  <td>{question.usersAnswer}</td>
-                </tr>
-              );
+                  <tr>
+                    <td>{question.id}</td>
+                    <td>{question.questionText}</td>
+                    <td>{question.usersAnswer}</td>
+                  </tr>
+                );
               })
             }
         </tbody>

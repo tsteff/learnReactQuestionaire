@@ -2,8 +2,8 @@ import React from 'react';
 import Question from './Question';
 import QuestionButton from './QuestionButton';
 import QuizButton from './QuizButton';
-import ReactPlayer from 'react-player'
 import QuestionSummary from './QuestionSummary'
+import YouTubeComponent from './YouTubeComponent'
 
 class MainApp extends React.Component {
   constructor(props) {
@@ -111,17 +111,7 @@ class MainApp extends React.Component {
   };
   showYoutube() {
     var question = this.state.questions.find(question => question.id == this.state.currentQuestion - 1);
-    var youTubeUrl = question.yesYouTubeUrl;
-    if (question.usersAnswer === 'no') {
-      youTubeUrl = question.noYouTubeUrl;
-    }
-    return <ReactPlayer
-          url={youTubeUrl}
-          playing={true}
-          height={$(window).height()}
-          width={$(window).width()}
-          onEnded={() => this.setState({ inTransition: false })}
-        />;
+    return <YouTubeComponent question={question} onVideoEnded={() => this.videoEnded()}/>
   };
   renderQuestion() {
     var question = this.state.questions.find(question => question.id == this.state.currentQuestion);
@@ -159,6 +149,13 @@ class MainApp extends React.Component {
         inTransition: true,
         questions: newQuestions,
         currentQuestion: this.state.currentQuestion + 1
+      }
+    );
+  };
+  videoEnded() {
+    this.setState(
+      {
+        inTransition: false
       }
     );
   };
