@@ -13,76 +13,23 @@ class MainApp extends React.Component {
       currentQuiz: 0,
       inTransition: false,
       questions: [],
-      quizzes: [
-        {
-          id: 1,
-          name: "Comic Quiz",
-          questions: [
-            {
-              id: 1,
-              questionText: "Is batman better than superman",
-              usersAnswer: "",
-              yesYouTubeUrl: "https://www.youtube.com/watch?v=DsAn_n6O5Ns",
-              noYouTubeUrl: "https://www.youtube.com/watch?v=sPmY9I-zWBk"
-            },
-            {
-              id: 2,
-              questionText: "Can wolverine beat ironman",
-              usersAnswer: "",
-              yesYouTubeUrl: "https://www.youtube.com/watch?v=xhfauq1llMc",
-              noYouTubeUrl: "https://www.youtube.com/watch?v=zSQbUV-u5Xo"
-            },
-            {
-              id: 3,
-              questionText: "Is wonder woman more intelligent than cat women",
-              usersAnswer: "",
-              yesYouTubeUrl: "https://www.youtube.com/watch?v=ALf5wpTokKA",
-              noYouTubeUrl: "https://www.youtube.com/watch?v=zSQbUV-u5Xo"
-            }
-          ]
-        },
-        {
-          id: 2,
-          name: "Movie Quiz",
-          questions: [
-            {
-              id: 1,
-              questionText: "Did titanic make more money than avatar",
-              usersAnswer: "",
-              yesYouTubeUrl: "https://www.youtube.com/watch?v=DsAn_n6O5Ns",
-              noYouTubeUrl: "https://www.youtube.com/watch?v=sPmY9I-zWBk"
-            },
-            {
-              id: 2,
-              questionText: "Did the narrator die in Fight Club",
-              usersAnswer: "",
-              yesYouTubeUrl: "https://www.youtube.com/watch?v=xhfauq1llMc",
-              noYouTubeUrl: "https://www.youtube.com/watch?v=zSQbUV-u5Xo"
-            },
-            {
-              id: 3,
-              questionText: "Pulp Fication was played at our wedding",
-              usersAnswer: "",
-              yesYouTubeUrl: "https://www.youtube.com/watch?v=ALf5wpTokKA",
-              noYouTubeUrl: "https://www.youtube.com/watch?v=zSQbUV-u5Xo"
-            }
-          ]
-        },
-        {
-          id: 3,
-          name: "Small One Question Quiz",
-          questions: [
-            {
-              id: 1,
-              questionText: "Small Question",
-              usersAnswer: "",
-              yesYouTubeUrl: "https://www.youtube.com/watch?v=DsAn_n6O5Ns",
-              noYouTubeUrl: "https://www.youtube.com/watch?v=sPmY9I-zWBk"
-            }
-          ]
-        }
-      ]
+      quizzes: []
     };
+    this.searchForQuizzes();
+  }
+  searchForQuizzes() {
+    fetch('/quizzes.json')
+      .then((response) => {
+        response.json().then((responseJson) => {
+          this.setState({
+            quizzes: responseJson,
+          });
+        })
+        .catch((err) => {
+          console.log("Error with json fetch. Check the network request in console");
+          console.log(err)
+        });
+      });
   }
   render() {
     if (this.state.currentQuiz == 0) {
@@ -100,12 +47,12 @@ class MainApp extends React.Component {
   }
   renderSelectQuizScreen() {
     return (
-      <div>
-        {
-          this.state.quizzes.map((quiz) => {
-            return <QuizButton onSelectQuiz={() => this.selectQuiz(quiz.id)} buttonText={quiz.name}/>
-          })
-        }
+        <div className="btn-toolbar">
+          {
+              this.state.quizzes.map((quiz) => {
+              return <QuizButton onSelectQuiz={() => this.selectQuiz(quiz.id)} buttonText={quiz.name}/>
+            })
+          }
       </div>
       );
   };
@@ -118,8 +65,10 @@ class MainApp extends React.Component {
     return (
           <div>
             <Question questionText={question.questionText} />
-            <QuestionButton onAnswerQuestion={() => this.answerQuestion(question.id, "yes")} buttonText="Yes" />
-            <QuestionButton onAnswerQuestion={() => this.answerQuestion(question.id, "no")} buttonText="No" />
+            <div className="btn-toolbar">
+              <QuestionButton onAnswerQuestion={() => this.answerQuestion(question.id, "yes")} buttonText="Yes" />
+              <QuestionButton onAnswerQuestion={() => this.answerQuestion(question.id, "no")} buttonText="No" />
+            </div>
           </div>
         );
   };
