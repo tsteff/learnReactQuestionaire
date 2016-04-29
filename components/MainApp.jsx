@@ -18,7 +18,7 @@ class MainApp extends React.Component {
     this.searchForQuizzes();
   }
   searchForQuizzes() {
-    fetch('/quizzes.json')
+    fetch('quizzes.json')
       .then((response) => {
         response.json().then((responseJson) => {
           this.setState({

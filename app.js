@@ -1,6 +1,6 @@
 import React from 'react';
 import MainApp from './components/MainApp';
-// import QuestionButtons from './components/QuestionButtons';
+require("./style.css");
 
 React.render(
    <MainApp />,
