@@ -47,7 +47,7 @@ class MainApp extends React.Component {
   }
   renderSelectQuizScreen() {
     return (
-      <div className="row">
+      <div className="row vertical-align">
         <div className="col-xs-3"></div>
         <div className="col-xs-6">
           <div className="text-center">

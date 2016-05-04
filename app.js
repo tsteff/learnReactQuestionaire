@@ -4,5 +4,5 @@ require("./style.css");
 
 React.render(
    <MainApp />,
- document.body
+ document.getElementById('content')
 );
