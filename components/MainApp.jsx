@@ -18,18 +18,28 @@ class MainApp extends React.Component {
     this.searchForQuizzes();
   }
   searchForQuizzes() {
-    fetch('quizzes.json')
-      .then((response) => {
-        response.json().then((responseJson) => {
+    // fetch('quizzes.json')
+    //   .then((response) => {
+    //     response.json().then((responseJson) => {
+    //       this.setState({
+    //         quizzes: responseJson,
+    //       });
+    //     })
+    //     .catch((err) => {
+    //       console.log("Error with json fetch. Check the network request in console");
+    //       console.log(err)
+    //     });
+    //   });
+      $.getJSON( "quizzes.json")
+        .done((responseJson) => {
           this.setState({
             quizzes: responseJson,
           });
         })
-        .catch((err) => {
-          console.log("Error with json fetch. Check the network request in console");
-          console.log(err)
-        });
-      });
+        .fail((err) => {
+          console.log("Error: " + err.responseText);
+        })
+
   }
   render() {
     if (this.state.currentQuiz == 0) {
