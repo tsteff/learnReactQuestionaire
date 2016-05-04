@@ -47,13 +47,23 @@ class MainApp extends React.Component {
   }
   renderSelectQuizScreen() {
     return (
-        <div className="btn-toolbar">
-          {
-              this.state.quizzes.map((quiz) => {
-              return <QuizButton onSelectQuiz={() => this.selectQuiz(quiz.id)} buttonText={quiz.name}/>
-            })
-          }
+      <div className="row">
+        <div className="col-xs-3"></div>
+        <div className="col-xs-6">
+          <div className="text-center">
+            <h1>Select Quiz</h1>
+            <div>
+              {
+                  this.state.quizzes.map((quiz) => {
+                  return <QuizButton onSelectQuiz={() => this.selectQuiz(quiz.id)} buttonText={quiz.name}/>
+                })
+              }
+            </div>
+          </div>
+        </div>
+        <div className="col-xs-3"></div>
       </div>
+
       );
   };
   showYoutube() {
