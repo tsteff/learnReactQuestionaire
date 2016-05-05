@@ -8,13 +8,17 @@ class YouTubeComponent extends React.Component {
     if (question.usersAnswer === 'no') {
       youTubeUrl = question.noYouTubeUrl;
     }
-    return <ReactPlayer
-          url={youTubeUrl}
-          playing={true}
-          height={$(window).height()}
-          width={$(window).width()}
-          onEnded={this.props.onVideoEnded}
-        />;
+    return (
+      <div className="row">
+        <ReactPlayer
+              url={youTubeUrl}
+              playing={true}
+              height={$(window).height()}
+              width={$(window).width()}
+              onEnded={this.props.onVideoEnded}
+            />
+      </div>
+    )
   }
 }
 export default YouTubeComponent
