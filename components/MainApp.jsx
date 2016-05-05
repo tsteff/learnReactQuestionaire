@@ -83,14 +83,21 @@ class MainApp extends React.Component {
   renderQuestion() {
     var question = this.state.questions.find(question => question.id == this.state.currentQuestion);
     return (
-          <div>
+      <div className="row vertical-align">
+        <div className="col-xs-3"></div>
+        <div className="col-xs-6">
+          <div className="text-center console">
             <Question questionText={question.questionText} />
-            <div className="btn-toolbar">
-              <QuestionButton onAnswerQuestion={() => this.answerQuestion(question.id, "yes")} buttonText="Yes" />
-              <QuestionButton onAnswerQuestion={() => this.answerQuestion(question.id, "no")} buttonText="No" />
+            <br/>
+            <div className="row">
+              <QuestionButton onAnswerQuestion={() => this.answerQuestion(question.id, "yes")} buttonText="Yes" buttonType="btn-default"/>
+              <QuestionButton onAnswerQuestion={() => this.answerQuestion(question.id, "no")} buttonText="No" buttonType="btn-default"/>
             </div>
           </div>
-        );
+        </div>
+        <div className="col-xs-3"></div>
+      </div>
+      );
   };
   returnSummary() {
     return (

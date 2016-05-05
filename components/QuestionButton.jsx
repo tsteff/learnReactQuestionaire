@@ -2,8 +2,9 @@ import React from 'react';
 
 class QuestionButton extends React.Component {
   render() {
+    var defaultClasses = "btn smallMargin ";
     return (
-            <button type="button" className="btn btn-success" onClick={this.props.onAnswerQuestion}>{this.props.buttonText}</button>
+            <button type="button" className={defaultClasses + this.props.buttonType} onClick={this.props.onAnswerQuestion}>{this.props.buttonText}</button>
     );
   }
 }
