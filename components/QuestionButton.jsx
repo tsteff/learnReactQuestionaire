@@ -8,7 +8,7 @@ class QuestionButton extends React.Component {
       padding: '10px'
     };
     return (
-      <img className="" onClick={this.props.onAnswerQuestion} src="images/yes.png" style={imgStyle} />
+      <img className="" onClick={this.props.onAnswerQuestion} src={this.props.imageUrl} style={imgStyle} />
     );
   }
 }

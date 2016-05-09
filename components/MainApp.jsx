@@ -93,8 +93,8 @@ class MainApp extends React.Component {
             <Question questionText={question.questionText} />
             <br/>
             <div className="row">
-              <QuestionButton onAnswerQuestion={() => this.answerQuestion(question.id, "yes")} buttonText="Yes" buttonType="btn-default"/>
-              <QuestionButton onAnswerQuestion={() => this.answerQuestion(question.id, "no")} buttonText="No" buttonType="btn-default"/>
+              <QuestionButton onAnswerQuestion={() => this.answerQuestion(question.id, "yes")} imageUrl="images/yes.png"/>
+              <QuestionButton onAnswerQuestion={() => this.answerQuestion(question.id, "no")} imageUrl="images/no.png"/>
             </div>
           </div>
         </div>
