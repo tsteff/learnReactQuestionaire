@@ -2,9 +2,13 @@ import React from 'react';
 
 class QuestionButton extends React.Component {
   render() {
-    var defaultClasses = "btn smallMargin ";
+    var imgStyle = {
+      height: '150px',
+      width: '150px',
+      padding: '10px'
+    };
     return (
-            <button type="button" className={defaultClasses + this.props.buttonType} onClick={this.props.onAnswerQuestion}>{this.props.buttonText}</button>
+      <img className="" onClick={this.props.onAnswerQuestion} src="images/yes.png" style={imgStyle} />
     );
   }
 }
