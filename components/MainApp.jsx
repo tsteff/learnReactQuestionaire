@@ -8,6 +8,7 @@ import YouTubeComponent from './YouTubeComponent'
 class MainApp extends React.Component {
   constructor(props) {
     super(props);
+    document.body.style.backgroundColor = "black";
     this.state = {
       currentQuestion: 1,
       currentQuiz: 0,
@@ -61,7 +62,7 @@ class MainApp extends React.Component {
         <div className="col-xs-3"></div>
         <div className="col-xs-6">
           <div className="text-center">
-            <h1>Select Quiz</h1>
+            <h1>Choisissez un thème</h1>
             <div>
               {
                   this.state.quizzes.map((quiz) => {
