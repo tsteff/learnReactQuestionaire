@@ -82,8 +82,8 @@ class MainApp extends React.Component {
   };
   renderQuestion() {
     var question = this.state.questions.find(question => question.id == this.state.currentQuestion);
-    Mousetrap.bind('y',  () => this.answerQuestion(question.id, "yes"));
-    Mousetrap.bind('n',  () => this.answerQuestion(question.id, "no"));
+    Mousetrap.bind(['y', 'u','i', 'o','p', 'm', 'l', 'k',],  () => this.answerQuestion(question.id, "yes"));
+    Mousetrap.bind(['y', 'p'],  () => this.answerQuestion(question.id, "no"));
 
     return (
       <div className="row vertical-align">

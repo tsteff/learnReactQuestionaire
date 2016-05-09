@@ -1,30 +1,45 @@
 import React from 'react';
 
 class QuestionSummary extends React.Component {
+constructor(props) {
+      super(props);
+      document.body.style.backgroundColor = "black";
+    }
+
   render() {
+    var imgStyle = {
+      height: '150px',
+      width: '150px',
+      padding: '10px'
+    };
     return (
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Question</th>
-            <th>Answer</th>
-          </tr>
-        </thead>
-        <tbody>
-            {
-              this.props.questionList.map((question) => {
-                return (
-                  <tr>
-                    <td>{question.id}</td>
-                    <td>{question.questionText}</td>
-                    <td>{question.usersAnswer}</td>
-                  </tr>
-                );
-              })
-            }
-        </tbody>
-      </table>
+      <div className="row">
+        <div className="col-xs-1"></div>
+        <div className="col-xs-5">
+          <div className="row text-center"><img src="images/yes.png" alt="smiley" style={imgStyle} /></div>
+          <div className="text-center console">
+          <div className="row">question</div>
+          <div className="row">question</div>
+          <div className="row">question</div>
+          <div className="row">question</div>
+
+          </div>
+        </div>
+        <div className="col-xs-5">
+          <div className="row text-center" ><img src="../images/no.png" alt="smiley" style={imgStyle}/></div>
+            <div className="text-center console">
+              <div className="row">question</div>
+              <div className="row">question</div>
+              <div className="row">question</div>
+              <div className="row">question</div>
+              <div className="row">question</div>
+              <div className="row">question</div>
+              <div className="row">question</div>
+              <div className="row">question</div>
+            </div>
+        </div>
+        <div className="col-xs-1"></div>
+      </div>
     );
   }
 }
