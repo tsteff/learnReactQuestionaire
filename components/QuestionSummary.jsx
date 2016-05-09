@@ -28,7 +28,7 @@ constructor(props) {
           </div>
         </div>
         <div className="col-xs-5">
-          <div className="row text-center"><img src="../images/no.png" alt="smiley" style={imgStyle}/></div>
+          <div className="row text-center"><img src="images/no.png" alt="smiley" style={imgStyle}/></div>
             <div className="text-center console">
               {
                 this.props.questionList.filter((question) => {
