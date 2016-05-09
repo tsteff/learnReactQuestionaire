@@ -18,24 +18,25 @@ constructor(props) {
         <div className="col-xs-5">
           <div className="row text-center"><img src="images/yes.png" alt="smiley" style={imgStyle} /></div>
           <div className="text-center console">
-          <div className="row">question</div>
-          <div className="row">question</div>
-          <div className="row">question</div>
-          <div className="row">question</div>
-
+          {
+            this.props.questionList.filter((question) => {
+                return (question.usersAnswer === 'yes');
+            }).map((question) => {
+                return <div className="row">{question.id}. {question.questionText}</div>
+            })
+          }
           </div>
         </div>
         <div className="col-xs-5">
-          <div className="row text-center" ><img src="../images/no.png" alt="smiley" style={imgStyle}/></div>
+          <div className="row text-center"><img src="../images/no.png" alt="smiley" style={imgStyle}/></div>
             <div className="text-center console">
-              <div className="row">question</div>
-              <div className="row">question</div>
-              <div className="row">question</div>
-              <div className="row">question</div>
-              <div className="row">question</div>
-              <div className="row">question</div>
-              <div className="row">question</div>
-              <div className="row">question</div>
+              {
+                this.props.questionList.filter((question) => {
+                    return (question.usersAnswer === 'no');
+                }).map((question) => {
+                    return <div className="row">{question.id}. {question.questionText}</div>
+                })
+              }
             </div>
         </div>
         <div className="col-xs-1"></div>
